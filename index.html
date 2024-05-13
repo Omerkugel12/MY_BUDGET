@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <span>Availbale Budget in <span class="date"></span></span>
+      <p class="balance">0.00</p>
+      <div class="income">
+        <span class="name">INCOMES</span>
+        <span class="income-header"></span>
+      </div>
+      <div class="expenses">
+        <span class="name">EXPENSES</span>
+        <span class="exspens-header"></span>
+      </div>
+    </header>
+
+    <nav>
+      <div class="nav-items">
+        <select name="operator" id="opertor-select">
+          <option value="+">+</option>
+          <option value="-">-</option>
+        </select>
+        <input id="text" type="text" placeholder="Add description" />
+        <input id="num" type="Number" placeholder="Value" />
+        <button class="apply" onclick="submit()">
+          <i class="fa-regular fa-circle-check"></i>
+        </button>
+      </div>
+    </nav>
+
+    <section>
+      <div class="lists">
+        <ul class="income-list">
+          <li><h3 id="income-list">INCOMES</h3></li>
+          <!-- <li><span></span><span class="income-value"></span></li> -->
+        </ul>
+        <ul class="expenses-list">
+          <li><h3 id="expenses-list">EXPENSES</h3></li>
+          <!-- <li><span></span><span class="expenses-value"></span></li> -->
+        </ul>
+      </div>
+    </section>
+
+    <script src="index.js"></script>
+  </body>
+</html>

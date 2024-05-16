@@ -99,7 +99,8 @@ function computeArraySum(array){
     let sum = 0
     for(let item of array){
         sum += item.value
-    }return sum
+    }
+    return sum
 }
 
 //function to submit by the buttom all the operates
@@ -145,6 +146,7 @@ function computeBalanace(){
 function removeIncome(elem){
     const listItem = elem.parentElement;
     const description = listItem.querySelector('span').innerText;
+    const value = listItem.querySelector('.income-value').innerText
     
     // Remove the item from the incomesArray
     incomesArray.forEach((item, index) => {

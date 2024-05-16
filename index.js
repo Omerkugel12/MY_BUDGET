@@ -13,6 +13,10 @@ const submitIcon = document.querySelector('.apply')
 const removeFromIncomes = document.querySelector('.removeFromIncome')
 const removeFromExpenses = document.querySelector('.removeFromExpenses')
 let colorVar = '#38B2AD'
+const navElem = document.querySelector('nav')
+const errorP = document.createElement('p')
+errorP.style.color = 'red'
+navElem.appendChild(errorP)
 //getting the name of the current month
 function findCurrentMonthAndYear(){
     const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -27,9 +31,10 @@ function findCurrentMonthAndYear(){
 function addToIncomeArray(){
     const incomeItem = {description: inputDescreptionElem.value, value: inputvalueElem.valueAsNumber}
     if(inputDescreptionElem.value.trim() === '' || isNaN(inputvalueElem.valueAsNumber) || inputvalueElem.valueAsNumber <= 0){
-        alert('All inputs must be filled and value must be a positive number')
+        errorP.innerText = 'All inputs must be filled and value must be a positive number'
     }else{
         incomesArray.push(incomeItem)
+        errorP.innerText = ''
         incomeElem.innerHTML += `<li><span>${incomeItem.description}</span><span class="income-value">+${incomeItem.value.toFixed(2)}</span><span class="removeFromIncome" onclick="removeIncome(this)"><i class="fa-regular fa-circle-xmark"></i></span></li>`
 }
 }
@@ -37,9 +42,10 @@ function addToIncomeArray(){
 function addToExpensesArray(){
     const expensItem = {description: inputDescreptionElem.value, value: inputvalueElem.valueAsNumber}
     if(inputDescreptionElem.value.trim() === "" || isNaN(inputvalueElem.valueAsNumber) || inputvalueElem.valueAsNumber <= 0){
-        alert('All inputs must be filled and value must be a positive number')
+        errorP.innerText = 'All inputs must be filled and value must be a positive number'
     }else{
         expensesArray.push(expensItem)
+        errorP.innerText = ''
         expensElem.innerHTML += `<li><span>${expensItem.description}</span><span class="expenses-value">-${expensItem.value.toFixed(2)}</span><span class="removeFromExpenses" onclick="removeExpens(this)"><i class="fa-regular fa-circle-xmark"></i></span></li>`
 }}
 //function to compute the sum of any array
@@ -124,13 +130,6 @@ function removeExpens(elem){
     balanceElem.innerText = `${computeBalanace()}`;
     saveExpensesArrayToLocalStorage()
 }
-findCurrentMonthAndYear(); //calling the function to show the current month and year
-showIncomesArrayFromLocalStorage(); //calling the function to show the incomes on the DOM after the window was closed
-showexpensesArrayFromLocalStorage(); //calling the function to show the expenses on the DOM after the window was closed
-incomeHeaderElem.innerText = `+${parseFloat(computeArraySum(incomesArray)).toFixed(2)}` 
-expensesHeaderElem.innerText = `-${parseFloat(computeArraySum(expensesArray)).toFixed(2)}`
-balanceElem.innerText = `${computeBalanace()}`
-
 elemSelect.addEventListener('change', ()=>{
     let classToAdd;
     let classToRemove;
@@ -151,5 +150,11 @@ elemSelect.addEventListener('change', ()=>{
     inputDescreptionElem.classList.add(classToAdd)
     inputvalueElem.classList.add(classToAdd)
     submitIcon.style.color = colorVar
-    document.querySelector(".active").style.border = `1px solid ${colorVar} !important;`;
 })
+
+findCurrentMonthAndYear(); //calling the function to show the current month and year
+showIncomesArrayFromLocalStorage(); //calling the function to show the incomes on the DOM after the window was closed
+showexpensesArrayFromLocalStorage(); //calling the function to show the expenses on the DOM after the window was closed
+incomeHeaderElem.innerText = `+${parseFloat(computeArraySum(incomesArray)).toFixed(2)}` 
+expensesHeaderElem.innerText = `-${parseFloat(computeArraySum(expensesArray)).toFixed(2)}`
+balanceElem.innerText = `${computeBalanace()}`

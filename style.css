@@ -130,7 +130,20 @@ li{
 .date{
   font-size: 1em;
 }
+input:focus{
+  outline-color: #38B2AD;
+}
+.green:focus{
+  outline:1px auto #38B2AD;
+}
 
+.red:focus{
+  outline:1px auto #F83D41;
+}
+
+.active{
+  border: 1px solid #38B2AD;
+}
 /* @media (max-width: 580px) {
   .lists{
     display: flex;

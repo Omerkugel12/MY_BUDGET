@@ -12,6 +12,7 @@ const dateElem = document.querySelector('.date')
 const submitIcon = document.querySelector('.apply')
 const removeFromIncomes = document.querySelector('.removeFromIncome')
 const removeFromExpenses = document.querySelector('.removeFromExpenses')
+let colorVar = '#38B2AD'
 //getting the name of the current month
 function findCurrentMonthAndYear(){
     const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -129,63 +130,26 @@ showexpensesArrayFromLocalStorage(); //calling the function to show the expenses
 incomeHeaderElem.innerText = `+${parseFloat(computeArraySum(incomesArray)).toFixed(2)}` 
 expensesHeaderElem.innerText = `-${parseFloat(computeArraySum(expensesArray)).toFixed(2)}`
 balanceElem.innerText = `${computeBalanace()}`
-//changing color by the user '+' or '-' selection
-elemSelect.addEventListener('change',function(){
+
+elemSelect.addEventListener('change', ()=>{
+    let classToAdd;
+    let classToRemove;
     if(elemSelect.value === '+'){
-        elemSelect.style.outline = '1px solid #38B2AD'
-            elemSelect.style.border = 'none'
-        elemSelect.addEventListener('focus',function(){
-            elemSelect.style.outline = '1px solid #38B2AD'
-            elemSelect.style.border = 'none'
-        })
-        elemSelect.addEventListener('blur',function(){
-            elemSelect.style.outline = ''
-            elemSelect.style.border = ''
-        })
-        inputDescreptionElem.addEventListener('focus',function(){
-            inputDescreptionElem.style.outline = '1px solid #38B2AD'
-            inputDescreptionElem.style.border = 'none'
-        })
-        inputDescreptionElem.addEventListener('blur',function(){
-            inputDescreptionElem.style.outline = ''
-            inputDescreptionElem.style.border = ''
-        })
-        inputvalueElem.addEventListener('focus',function(){
-            inputvalueElem.style.outline = '1px solid #38B2AD'
-            inputvalueElem.style.border = 'none'
-        })
-        inputvalueElem.addEventListener('blur',function(){
-            inputvalueElem.style.outline = ''
-            inputvalueElem.style.border = ''
-        })
-        submitIcon.style.color = '#38B2AD'
-    }else if(elemSelect.value === '-'){
-        elemSelect.style.outline = '1px solid #F83D41'
-            elemSelect.style.border = 'none'
-        elemSelect.addEventListener('focus',function(){
-            elemSelect.style.outline = '1px solid #F83D41'
-            elemSelect.style.border = 'none'
-        })
-        elemSelect.addEventListener('blur',function(){
-            elemSelect.style.outline = ''
-            elemSelect.style.border = ''
-        })
-        inputDescreptionElem.addEventListener('focus',function(){
-            inputDescreptionElem.style.outline = '1px solid #F83D41'
-            inputDescreptionElem.style.border = 'none'
-        })
-        inputDescreptionElem.addEventListener('blur',function(){
-            inputDescreptionElem.style.outline = ''
-            inputDescreptionElem.style.border = ''
-        })
-        inputvalueElem.addEventListener('focus',function(){
-            inputvalueElem.style.outline = '1px solid #F83D41'
-            inputvalueElem.style.border = 'none'
-        })
-        inputvalueElem.addEventListener('blur',function(){
-            inputvalueElem.style.outline = ''
-            inputvalueElem.style.border = ''
-        })
-        submitIcon.style.color = '#F83D41'
+        classToAdd = 'green';
+        classToRemove = 'red';
+        colorVar = '#38B2AD'
     }
-});
+    else{
+        classToAdd = 'red';
+        classToRemove = 'green';
+        colorVar = '#F83D41'
+    }
+    elemSelect.classList.remove(classToRemove)
+    inputDescreptionElem.classList.remove(classToRemove)
+    inputvalueElem.classList.remove(classToRemove)
+    elemSelect.classList.add(classToAdd)
+    inputDescreptionElem.classList.add(classToAdd)
+    inputvalueElem.classList.add(classToAdd)
+    submitIcon.style.color = colorVar
+    document.querySelector(".active").style.border = `1px solid ${colorVar} !important;`;
+})

@@ -13,6 +13,7 @@ const submitIcon = document.querySelector('.apply')
 const removeFromIncomes = document.querySelector('.removeFromIncome')
 const removeFromExpenses = document.querySelector('.removeFromExpenses')
 let colorVar = '#38B2AD'
+const header = document.querySelector('header')
 const navElem = document.querySelector('nav')
 const errorP = document.createElement('p')
 errorP.style.color = 'red'
@@ -158,3 +159,15 @@ showexpensesArrayFromLocalStorage(); //calling the function to show the expenses
 incomeHeaderElem.innerText = `+${parseFloat(computeArraySum(incomesArray)).toFixed(2)}` 
 expensesHeaderElem.innerText = `-${parseFloat(computeArraySum(expensesArray)).toFixed(2)}`
 balanceElem.innerText = `${computeBalanace()}`
+
+const drkMdBtn = document.createElement('button')
+drkMdBtn.textContent = 'DARK-MODE'
+header.appendChild(drkMdBtn)
+drkMdBtn.onclick = function(){
+    document.body.classList.toggle('dark-theme')
+    if(document.body.classList.contains('dark-theme')){
+        drkMdBtn.textContent = 'LIGHT-MODE'
+    }else{
+        drkMdBtn.textContent = 'DARK-MODE'
+    }
+}

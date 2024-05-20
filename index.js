@@ -94,39 +94,17 @@ function computeBalanace(){
     return Number(balanceSum).toFixed(2)
 }
 function removeIncome(elem){
-    const listItem = elem.parentElement;
-    const description = listItem.querySelector('span').innerText;
-    const value = listItem.querySelector('.income-value').innerText
-    
-    // Remove the item from the incomesArray
-    incomesArray.forEach((item, index) => {
-        if (item.description === description) {
-            incomesArray.splice(index, 1);
-        }
-    });
-    
-    // Update the DOM
-    listItem.remove();
-    
-    // Update incomeHeaderElem
-    incomeHeaderElem.innerText = `+${parseFloat(computeArraySum(incomesArray)).toFixed(2)}`;
-    
-    // Update balanceElem
+    const indexToRemove = incomesArray.indexOf(elem.parentElement)
+    incomesArray.splice(indexToRemove,1)
+    elem.parentElement.remove()
+    incomeHeaderElem.innerText = `+${parseFloat(computeArraySum(incomesArray)).toFixed(2)}`
     balanceElem.innerText = `${computeBalanace()}`;
-
-    // Save updated incomesArray to local storage
-    saveIncomeArrayToLocalStorage();
+    saveIncomeArrayToLocalStorage()
 }
 function removeExpens(elem){
-    const liElem = elem.parentElement
-    const description = liElem.querySelector('span').innerText
-
-    for(let i = 0;i<expensesArray.length;i++){
-        if(expensesArray[i].description === description){
-            expensesArray.splice(i,1)
-        }
-    }
-    liElem.remove()
+    const indexToRemove = expensesArray.indexOf(elem.parentElement)
+    expensesArray.splice(indexToRemove,1)
+    elem.parentElement.remove()
     expensesHeaderElem.innerText = `-${parseFloat(computeArraySum(expensesArray)).toFixed(2)}`
     balanceElem.innerText = `${computeBalanace()}`;
     saveExpensesArrayToLocalStorage()
@@ -171,3 +149,4 @@ drkMdBtn.onclick = function(){
         drkMdBtn.textContent = 'DARK-MODE'
     }
 }
+console.log(incomesArray);
